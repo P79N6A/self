@@ -1,0 +1,14 @@
+phpver=7.2.1
+yum install libtool-ltdl -y
+rm -rf /usr/local/bin/php
+rm -rf /usr/bin/php
+rm -rf /etc/init.d/php-fpm
+cd /opt
+wget https://dl.ccavs.org/linux/centos/php-${phpver}.tar.gz
+tar -xzvf php-${phpver}.tar.gz
+cp /opt/php-${phpver}/bin/php /usr/bin/
+cp /opt/php-${phpver}/etc/init.d.php-fpm /etc/init.d/php-fpm
+killall php-fpm
+chmod +x /etc/init.d/php-fpm
+chkconfig php-fpm on
+service php-fpm start

@@ -1,0 +1,8 @@
+Error describtion: Undefined subroutine & FCGI::accept
+Solution Source: https://github.com/leejo/cgi-fast/issues/11
+Code
+while (my $q = new CGI::Fast) {
+end of Code
+change it to
+while (my $q = new CGI) {
+System: Centos-6.9-x86_64

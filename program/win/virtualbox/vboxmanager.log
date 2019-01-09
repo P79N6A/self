@@ -1,0 +1,1 @@
+VBoxManage convertfromraw --format VDI img-name.img vdi-name.vdi

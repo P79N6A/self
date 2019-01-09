@@ -1,0 +1,61 @@
+yum install -y perl-CGI perl-FCGI perl-Net-Telnet perl-Net-OpenSSH perl-Net-SNMP perl-Net-DNS perl-LDAP perl-libwww-perl perl-IO-Socket-SSL perl-Socket6 perl-Time-HiRes perl-ExtUtils-MakeMaker
+yum install perl-CPAN perl-rrdtool -y
+# cpan ftp proxy http://ftp.jaist.ac.jp/pub/CPAN/
+cpan IO::Pty
+cpan Config::Grammar
+
+wget http://www.fping.org/dist/fping-4.0.tar.gz
+tar -xzvf fping-4.0.tar.gz
+cd fping-4.0 && ./configure --prefix=/opt/fping-4.0
+make && make install
+
+wget https://oss.oetiker.ch/smokeping/pub/smokeping-2.6.11.tar.gz
+tar -xzvf smokeping-2.6.11.tar.gz
+./configure -prefix=/opt/smokeping-2.6.11
+/usr/bin/gmake install
+
+cd /opt/smokeping-2.6.11
+mkdir data
+mkdir var
+mkdir cache
+vim /opt/smokeping-2.6.11/lib/Smokeping/Graphs.pm
+#add '--font TITLE:20:"WenQuanYi Zen Hei Mono"',
+cp etc/config.dist etc/config
+#edit it
+chown www:www smokeping/cache
+chown www:www smokeping/data
+chown www:www smokeping/cache/*
+chown www:www smokeping/data/*
+chmod 777 smokeping/cache/*
+chmod 777 smokeping/data/*
+chmod 600 etc/smokeping_secrets.dist
+bin/smokeping
+wget -O /etc/init.d/smokeping https://raw.githubusercontent.com/max2max/self/master/deploy/smokeping-init
+#edit it change ; to & , or the smokeping will auto run bakground
+chmod +x /etc/init.d/smokeping
+chkconfig /etc/init.d/smokeping on
+service smokeping start
+
+# fcgi
+# https://www.howtoforge.com/serving-cgi-scripts-with-nginx-on-centos-6.0-p2
+# https://www.nginx.com/resources/wiki/start/topics/examples/fcgiwrap/ manul install手动安装
+# https://www.nginx.com/resources/wiki/start/topics/examples/fastcgiexample/ 范例
+yum install fcgi-devel
+cd /usr/local/src/
+git clone git://github.com/gnosek/fcgiwrap.git
+cd fcgiwrap
+autoreconf -i
+./configure
+make
+make install
+yum install spawn-fcgi
+cat > '/etc/sysconfig/spawn-fcgi' <<EOF
+FCGI_SOCKET=/var/run/fcgiwrap.socket
+FCGI_PROGRAM=/usr/local/sbin/fcgiwrap
+FCGI_USER=www
+FCGI_GROUP=www
+FCGI_EXTRA_OPTIONS="-M 0700"
+OPTIONS="-u $FCGI_USER -g $FCGI_GROUP -s $FCGI_SOCKET -S $FCGI_EXTRA_OPTIONS -F 1 -P /var/run/spawn-fcgi.pid -- $FCGI_PROGRAM"
+EOF
+chkconfig --levels 235 spawn-fcgi on
+/etc/init.d/spawn-fcgi start

@@ -1,0 +1,7 @@
+解压<br />
+mkdir tmp && cd tmp
+xz -dc ../initrd.img | cpio -id<br />
+<br />
+压缩<br />
+find . | cpio -H newc --create --verbose | gzip -9 > ../initrd.gz<br />
+find . | cpio -c -o | xz -9 --format=lzma > ../initrd.img<br />

@@ -1,0 +1,7 @@
+# sdkman
+curl -s "https://get.sdkman.io" | bash
+# open a new terminal
+source "/root/.sdkman/bin/sdkman-init.sh
+sdk install gradle 4.5
+sdk install springboot
+# maven

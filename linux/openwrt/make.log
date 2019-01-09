@@ -1,0 +1,50 @@
+## github aa65535 ##
+git clone https://github.com/shadowsocks/openwrt-feeds.git package/feeds
+git clone https://github.com/shadowsocks/openwrt-shadowsocks.git package/shadowsocks-libev
+make menuconfig
+# make -j1 V=s
+make package/shadowsocks-libev/compile V=99
+
+git clone https://github.com/shadowsocks/luci-app-shadowsocks.git package/luci-app-shadowsocks
+# 编译 po2lmo (如果有po2lmo可跳过)
+pushd package/luci-app-shadowsocks/tools/po2lmo
+make && sudo make install
+popd
+make menuconfig
+make package/luci-app-shadowsocks/compile V=99
+
+git clone https://github.com/aa65535/openwrt-dist-luci.git package/openwrt-dist-luci
+make menuconfig
+make package/openwrt-dist-luci/compile V=99
+
+git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
+make menuconfig
+make package/chinadns/compile V=99
+
+git clone https://github.com/aa65535/openwrt-dns-forwarder.git package/dns-forwarder
+make menuconfig
+make package/dns-forwarder/compile V=99
+
+git clone https://github.com/shadowsocks/openwrt-feeds.git package/feeds
+git clone https://github.com/aa65535/openwrt-simple-obfs.git package/simple-obfs
+make menuconfig
+make package/simple-obfs/compile V=99
+
+## github AlexZhuo ##
+git clone https://github.com/AlexZhuo/openwrt-feeds.git package/feeds
+git clone https://github.com/AlexZhuo/openwrt-shadowsocksr.git package/shadowsocksr-libev
+make menuconfig
+make package/shadowsocksr-libev/compile V=99
+
+git clone https://github.com/AlexZhuo/luci-app-shadowsocksR.git package/luci-app-shadowsocksR
+pushd package/luci-app-shadowsocksR/tools/po2lmo
+make && sudo make install
+popd
+make menuconfig
+make package/luci-app-shadowsocksR/compile V=99
+
+git clone https://github.com/AlexZhuo/openwrt-dnsforwarder/ package/dnsforwarder
+make menuconfig
+make package/dnsforwarder/compile V=99
+
+

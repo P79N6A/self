@@ -1,0 +1,62 @@
+badvpn-tun2socks --tundev tap0901:TAP:10.0.0.1:10.0.0.0:255.255.255.0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 127.0.0.1:1081 --udpgw-remote-server-addr 127.0.0.1:1081
+
+netsh interface ip set interface Local ignoredefaultroutes=enabled
+route add 127.0.0.1 192.168.1.1 metric 5
+route add 8.8.8.8 192.168.1.1 metric 5
+route add 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+
+netsh interface ip set interface Local ignoredefaultroutes=disabled
+route delete 127.0.0.1 192.168.1.1 metric 5
+route delete 8.8.8.8 192.168.1.1 metric 5
+route delete 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+
+badvpn-tun2socks --tundev tap0901:TAP:10.0.0.1:10.0.0.0:255.255.255.0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 107.151.188.124:4399 --udpgw-remote-server-addr 107.151.188.124:4399 --username 1 --password 1
+
+
+
+cd C:\Users\test\Desktop\tun2socksGUI v2.2.1\tun2sock
+
+netsh interface ip set interface Meilan ignoredefaultroutes=enabled
+route add 107.151.188.124 192.168.43.1 metric 5
+route add 8.8.8.8 192.168.43.1 metric 5
+route add 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+<LOCAL_INTERFACE> Ò»°ãÎª"±¾µØÁ¬½Ó"
+<SOCKS5_SERVER> Îª´úÀíIPµØÖ·
+<DNS_SERVER> Ò»°ãÎª8.8.8.8»ò´úÀíIPµØÖ·
+<LOCAL_GATEWAY> "±¾µØÁ¬½Ó"Ô­À´Íø¹Ø
+ÒÔÉÏÐÅÏ¢¿ÉÍ¨¹ý"±¾µØÁ¬½Ó"µÄÏêÇé²é¿´
+
+netsh interface ip set interface Meilan ignoredefaultroutes=disabled
+route delete 107.151.188.124 192.168.43.1 metric 5
+route delete 8.8.8.8 192.168.43.1 metric 5
+route delete 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+
+badvpn-tun2socks --tundev tap0901:TAP:10.0.0.1:10.0.0.0:255.255.255.0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 192.168.43.1:1081 --udpgw-remote-server-addr 192.168.43.1:1081
+
+netsh interface ip set interface Meilan ignoredefaultroutes=enabled
+route add 192.168.43.1 192.168.43.1 metric 5
+route add 8.8.8.8 192.168.43.1 metric 5
+route add 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+
+netsh interface ip set interface Meilan ignoredefaultroutes=disabled
+route delete 192.168.43.1 192.168.43.1 metric 5
+route delete 8.8.8.8 192.168.43.1 metric 5
+route delete 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+badvpn-tun2socks --tundev tap0901:TAP:10.0.0.1:10.0.0.0:255.255.255.0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 192.168.137.1:2000 --udpgw-remote-server-addr 192.168.137.1:2000
+
+netsh interface ip set interface Meilan ignoredefaultroutes=enabled
+route add 192.168.137.1 192.168.137.1 metric 5
+route add 202.101.224.69 192.168.137.1 metric 5
+route add 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6
+
+
+netsh interface ip set interface Meilan ignoredefaultroutes=disabled
+route delete 192.168.137.1 192.168.137.1 metric 5
+route delete 202.101.224.69 192.168.137.1 metric 5
+route delete 0.0.0.0 mask 0.0.0.0 10.0.0.2 metric 6

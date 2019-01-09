@@ -1,0 +1,18 @@
+echo "" >> .bashrc
+echo 'export GOROOT=/root/go1.9.2' >> .bashrc
+echo 'export GOPATH=/root/gopath' >> .bashrc
+echo 'export PATH=$GOROOT/bin:$PATH' >> .bashrc
+echo "" >> .bashrc
+source .bashrc
+export GOPATH=$HOME/gopath
+mkdir -p $GOPATH/src/github.com
+wget https://github.com/prometheus/prometheus/releases/download/v2.0.0/prometheus-2.0.0.linux-amd64.tar.gz
+tar -xzvf prometheus-2.0.0.linux-amd64.tar.gz
+# mv prometheus-2.0.0.linux-amd64 prometheus
+cd prometheus-2.0.0.linux-amd64
+git clone https://github.com/prometheus/blackbox_exporter
+cd blackbox_exporter
+make
+./blackbox_exporter &
+cd ../
+vim prometheus.yml

@@ -1,0 +1,11 @@
+wget http://dns.measurement-factory.com/tools/dnstop/src/dnstop-20140915.tar.gz
+tar -xzvf dnstop-20140915.tar.gz
+cd dnstop-20140915
+./configure --prefix=/opt/dnstop
+mkdir -p /opt/dnstop/bin
+mkdir -p /opt/dnstop/share/man/man8
+make
+make install
+
+/opt/dnstop/bin/dnstop -Q -R -a -l 5 eth0
+#输入5

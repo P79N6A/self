@@ -1,0 +1,18 @@
+1、网页端设置好密钥
+2、客户端
+git config --global user.name "your github username"
+git config --global user.email  "your github login email"
+ssh -T git@github.com
+cat > ~/.ssh/config <<"EOF"
+Host github.com
+        HostName ssh.github.com
+        User git
+        IdentityFile ~/.ssh/id_rsa_your_key
+EOF
+# add key file then
+chmod 600 ~/.ssh/id_rsa_your_key
+git clone ssh://github.com/user/repository
+
+# visual studio
+Host vs-ssh.visualstudio.com
+        IdentityFile ~/.ssh/putty_key

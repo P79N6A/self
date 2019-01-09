@@ -1,0 +1,20 @@
+wget https://dl.influxdata.com/influxdb/releases/influxdb-1.4.2.x86_64.rpm
+sudo yum localinstall influxdb-1.4.2.x86_64.rpm
+# https://portal.influxdata.com/downloads
+tail -f /var/log/influxdb/influxd.log
+service influxdb restart
+vim /etc/influxdb/influxdb.conf
+# bind at 127.0.0.1
+# curl -i -XPOST 'http://127.0.0.1:8086/write?db=collectd'
+
+create user ops with password '123123'
+grant ALL PRIVILEGES on collectdb to user1;
+
+enabled = true
+bind-address = "127.0.0.1:25826"
+database = "collectd"
+typesdb = "/usr/share/collectd/types.db"
+batch-size = 5000
+batch-pending = 10
+batch-timeout = "10s"
+read-buffer = 0

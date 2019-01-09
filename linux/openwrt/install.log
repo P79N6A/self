@@ -1,0 +1,12 @@
+opkg install luci-i18n-base-zh-cn
+opkg install ca-certificates
+opkg install ca-bundle
+opkg install libustream-openssl
+opkg install curl
+opkg install unzip
+opkg install ip-full
+opkg install iptables-mod-tproxy
+opkg install kmod-ipt-tproxy
+opkg install iptables-mod-nat-extra
+opkg install libpcre
+opkg install bind-dig

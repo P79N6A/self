@@ -1,0 +1,67 @@
+yum install lz4-devel lzo-devel pam-devel
+
+git clone https://github.com/OpenVPN/openvpn
+
+cd openvpn
+autoreconf -i -v -f
+./configure --prefix=/opt/openvpn
+make
+make install
+
+
+# 启动openvpn
+nohup /opt/openvpn/sbin/openvpn --config /opt/openvpn/server.conf > /dev/null 2>&1 &
+
+# 部署
+yum install lz4-devel lzo-devel pam-devel -y
+
+cd /root/tmp
+wget https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.4/EasyRSA-3.0.4.tgz
+tar -xzvf EasyRSA-3.0.4.tgz
+cd EasyRSA-3.0.4
+./easyrsa init-pki
+./easyrsa build-ca nopass
+./easyrsa gen-req server1 nopass
+./easyrsa sign server server1 nopass
+./easyrsa gen-dh
+./easyrsa gen-req client1 nopass
+./easyrsa sign client client1
+
+cd /opt
+wget https://dl.ccavs.org/linux/centos/openvpn.tar.gz
+tar xzvf openvpn.tar.gz
+cd openvpn
+sed -i "s/160.16.202.212/$ip/g" ./server.conf
+
+iptables -t nat -A POSTROUTING -o eth0 -s 10.8.0.0/24 -j MASQUERADE
+/etc/init.d/iptables save
+/etc/init.d/iptables restart
+
+bash ovpn.sh
+
+
+echo "client
+dev tun
+proto udp
+remote $ip $port
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+redirect-gateway def1
+sndbuf 0
+rcvbuf 0
+key-direction 1
+setenv opt block-outside-dns
+comp-lzo
+verb 3" >> ./client.ovpn
+
+echo "<ca>" >> ./client.ovpn
+cat /root/tmp/EasyRSA-3.0.4/pki/ca.crt >> ./client.ovpn
+echo "</ca>" >> ./client.ovpn
+echo "<cert>" >> ./client.ovpn
+cat /root/tmp/EasyRSA-3.0.4/pki/issued/client1.crt >> ./client.ovpn
+echo "</cert>" >> ./client.ovpn
+echo "<key>" >> ./client.ovpn
+cat /root/tmp/EasyRSA-3.0.4/pki/private/client1.key >> ./client.ovpn
+echo "</key>" >> ./client.ovpn

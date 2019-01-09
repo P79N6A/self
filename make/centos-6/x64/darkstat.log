@@ -1,0 +1,12 @@
+wget https://unix4lyfe.org/darkstat/darkstat-3.0.719.tar.bz2
+tar -xjvf darkstat-3.0.719.tar.bz2
+cd darkstat-3.0.719
+./configure --prefix=/opt/darkstat-3.0.719
+make
+make install
+
+#注意先后顺序
+iptables -I INPUT -p tcp --dport 667 -j DROP
+iptables -I INPUT -s server_ip -p tcp --dport 667 -j ACCEPT
+
+/opt/darkstat-3.0.719/sbin/darkstat -i eth0

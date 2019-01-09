@@ -1,0 +1,14 @@
+wget https://pkg.ci.collectd.org/rpm/collectd-5.8/epel-6-x86_64/collectd-5.8.0.61.g4012a0e-8.el6.x86_64.rpm
+yum localinstall collectd-5.8.0.61.g4012a0e-8.el6.x86_64.rpm
+
+
+#新版须自己编译ping插件
+yum install collectd collectd-ping -y
+vim /etc/collectd.conf
+
+PIDFile     "/var/run/collectd.pid"
+PluginDir   "/usr/lib64/collectd"
+TypesDB     "/usr/share/collectd/types.db"
+Interval     10
+Timeout      2
+ReadThreads  5

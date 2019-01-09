@@ -1,0 +1,136 @@
+###  keep some useful urls here
+
+#####################################################################
+
+alg:
+  http://daoluan.net/blog/sort/   ## stl algs
+  http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html
+  http://deeplearning.net/tutorial/
+  http://www.ibm.com/developerworks/cn/opensource/os-pythonnltk/index.html
+  http://www.math.pku.edu.cn/teachers/qiuzy/ds_python/courseware/index.htm # in python
+  http://pydata.org/nyc2014/abstracts/
+  http://pythonhackers.com/p/vinta/awesome-python
+  http://www.codelast.com/?page_id=963
+  https://www.metacademy.org/list
+  http://www.jzsyz.jzedu.cn/xxjs/suanfa/index.html
+  http://www.math.pku.edu.cn/teachers/qiuzy/ds_python/courseware/index.htm
+  http://blog.codinglabs.org/  ## alg
+
+#####################################################################
+
+Machine Learning:
+  https://app.wmcloud.com/mercury/community/  ##quantum
+  http://www.extreme-learning-machines.org/
+  http://blog.niubua.com/   ## ml
+  http://www.astro.washington.edu/users/vanderplas/Astr599/notebooks/
+  http://seat.massey.ac.nz/personal/s.r.marsland/MLbook.html
+  http://pythonhosted.org/Kaggler/
+  https://www.kaggle.com/wiki/GettingStartedWithPythonForDataScience
+
+#####################################################################
+
+python:
+  http://lazynight.me/blog/  ## python & algs
+  http://stackoverflow.com/questions/15556718/greenlet-vs-threads
+  http://techspot.zzzeek.org/2015/02/15/asynchronous-python-and-databases/
+  http://www.toptal.com/python/beginners-guide-to-concurrency-and-parallelism-in-python
+  http://jessenoller.com/good-to-great-python-reads/
+  http://blog.jobbole.com/67009/  ## language interpreter
+  http://www.xuyukun.com/category/aticle/python/
+  https://rcc.fsu.edu/docs/high-performance-computing-python
+  http://www.fullstackpython.com/task-queues.html
+  http://www.kunxi.org/blog/2014/05/lru-cache-in-python/
+  http://nbviewer.ipython.org/
+  http://blog.hownowstephen.com/post/50743415449/gevent-tutorial
+  http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+
+#####################################################################
+
+BI:
+  cubes&dataming  # python BI
+
+#####################################################################
+
+openstack:
+  http://lingxiankong.github.io/
+  http://www.vpsee.com/
+  http://ilearnstack.com/openstack/
+
+#####################################################################
+
+erlang:
+  http://www.erlang.org/course/course.html
+  http://www.erlang-cn.org/
+  http://blog.yufeng.info/
+  http://learnyousomeerlang.com/content
+
+#####################################################################
+
+django:
+  http://www.weiguda.com/blog/    ## django async
+  http://www.pydanny.com/overloading-form-fields.html  ## django init kwargs
+  http://www.kzx123.com/?p=137  ## django async
+  https://www.seedinvest.com/labs/backend/upgrading-from-django-1-4-to-django-1-7/
+  http://andrewsforge.com/article/upgrading-django-to-17/part-4-upgrade-strategies/
+  http://andrewsforge.com/presentation/upgrading-django-to-17/
+  http://stackoverflow.com/questions/30050634/django-templatedoesnotexist-error-but-using-loader-django-template-loaders-a
+  https://djangosnippets.org/snippets/2607/  ## add decorator for urls
+  https://djangosnippets.org/snippets/2532/
+  http://stackoverflow.com/questions/2307926/is-it-possible-to-decorate-include-in-django-urls-with-login-required
+  http://stackoverflow.com/questions/238081/how-do-you-log-server-errors-on-django-sites
+  http://www.isaced.com/post-248.html  ## django-gunicom-nginx
+  http://stackoverflow.com/questions/4455330/why-does-declaring-a-manager-to-a-django-model-void-objects
+  http://django-china.cn/topic/151/?page=1#p726  ## django signal
+  http://hackerxu.com/Twd/#1-twd17
+  https://www.caktusgroup.com/blog/2014/06/23/scheduling-tasks-celery/  ## django+celery
+  http://django-china.cn/wiki/resources/
+
+#####################################################################
+
+server:
+  http://wiki.nginx.org/NginxChs  ## nginx
+  https://www.nginx.com/blog/http-keepalives-and-web-performance/
+  http://selleo.com/blog/technologies/web-technologies-for-speed-up/
+  http://drops.wooyun.org/tips/6570  # nginx and others
+
+#####################################################################
+
+deploy:
+  http://www.lijiejie.com/set-up-svn-server-under-ubuntu/  ## 自动化部署
+  http://projects.unbit.it/uwsgi/wiki/Example  ## deploy python project
+
+#####################################################################
+
+job queues:
+  https://www.digitalocean.com/community/tutorials/how-to-use-celery-with-rabbitmq-to-queue-tasks-on-an-ubuntu-vps
+  http://www.jianshu.com/p/2f7773ebb9f1  # rabbitmq
+  http://xiaorui.cc/2015/04/01/python-rq%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%BC%98%E5%85%88%E7%BA%A7%E9%98%9F%E5%88%97/ ## rq
+  http://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis
+  http://highscalability.com/blog/2014/9/8/how-twitter-uses-redis-to-scale-105tb-ram-39mm-qps-10000-ins.html
+  http://www.qmailer.net/archives/165.html
+
+#####################################################################
+
+others:
+  http://penguindreams.org/blog/signature-verification-between-java-and-python/  ## signature between python and java 
+  http://blog.oddbit.com/2011/05/08/converting-openssh-public-keys/  ## convert ssh-keygen public key to pkcs1
+  http://nqdeng.github.io/7-days-nodejs/  ## nodejs tutorial
+  http://norvig.com/21-days.html  ## about how to be a better programmer
+  http://howtoprogrambetter.com/10-steps-to-become-a-senior-software-engineer/ 
+  http://peternixey.com/post/83510597580/how-to-be-a-great-software-developer
+  http://learnyouahaskell.com/chapters  ## haskell
+  http://stackoverflow.com/questions/67299/is-unit-testing-worth-the-effort
+  http://c.biancheng.net/cpp/u/jiaocheng/  ## c language
+  http://www.weiguda.com/blog/41/
+  http://codereview.stackexchange.com/
+  http://gashero.iteye.com/blog/2075324  ## swift
+  http://www.coder4.com  ## blog
+  http://blog.eood.cn/exception
+  https://www.textarea.com/
+  http://timyang.net/category/python/
+  http://wiki.swarma.net/index.php/%E9%A6%96%E9%A1%B5
+  http://www.csdn.net/article/2014-12-08/2823019-DevOps
+  http://www.devopsbookmarks.com/linux
+  http://bindog.github.io/blog/2015/04/20/other-way-to-collect-sina-data/
+  http://flask.pocoo.org/snippets/75/   # flask+redis+session
+  http://wklken.me/posts/2013/09/09/python-framework-flask.html

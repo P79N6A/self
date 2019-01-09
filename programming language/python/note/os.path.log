@@ -1,0 +1,159 @@
+一、
+代码
+import os  
+#该文件所在位置：D:\第1层\第2层\第3层\第4层\第5层\test11.py  
+  
+path1 = os.path.dirname(__file__)  
+print(path1)#获取当前运行脚本的绝对路径  
+  
+path2 = os.path.dirname(os.path.dirname(__file__)) #  
+print(path2)#获取当前运行脚本的绝对路径（去掉最后一个路径）  
+  
+path3 = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  
+print(path3)#获取当前运行脚本的绝对路径（去掉最后2个路径）  
+  
+path4 = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))  
+print(path4)#获取当前运行脚本的绝对路径（去掉最后3个路径）  
+  
+path5 = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))  
+print(path5)#获取当前运行脚本的绝对路径（去掉最后4个路径）  
+  
+path6 = os.__file__                  #获取os所在的目录  
+print(path6)  
+
+结果
+C:\Python352\python.exe D:/第1层/第2层/第3层/第4层/第5层/test11.py  
+D:/第1层/第2层/第3层/第4层/第5层  
+D:/第1层/第2层/第3层/第4层  
+D:/第1层/第2层/第3层  
+D:/第1层/第2层  
+D:/第1层  
+C:\Python352\lib\os.py  
+  
+Process finished with exit code 0
+
+os.path.dirname(__file__)返回的是脚本文件的路径，需要注意几点
+1、不可以命令行运行，只能通过文件运行，如：python test.py, 不可以print os.path.dirname(__file__)，
+命令行运行，就没有给__file__赋值，此时会输出错误提示如：NameError: name '__file__' is not defined
+2、在运行的时候如果输入完整的执行的路径，则返回.py文件的绝对路径
+
+http://blog.csdn.net/JOJOY_tester/article/details/54598713
+
+二、
+http://www.educity.cn/wenda/354028.html
+
+python 路径相关的函数
+os.listdir(dirname)：列出dirname下的目录和文件
+
+os.getcwd()：获得当前工作目录
+
+os.curdir:返回当前目录（'.')
+
+os.chdir(dirname):改变工作目录到dirname
+
+os.path.isdir(name):判断name是不是一个目录，name不是目录就返回false
+
+os.path.isfile(name):判断name是不是一个文件，不存在name也返回false
+
+os.path.exists(name):判断是否存在文件或目录name
+
+os.path.getsize(name):获得文件大小，如果name是目录返回0
+
+os.path.abspath(name):获得绝对路径
+
+os.path.normpath(path):规范path字符串形式
+
+os.path.split(name):分割文件名与目录（事实上，如果你完全使用目录，它也会将最后一个目录作为文件名而分离，同时它不会判断文件或目录是否存在）
+
+os.path.splitext():分离文件名与扩展名
+
+os.path.join(path,name):连接目录与文件名或目录
+
+os.path.basename(path):返回文件名
+
+os.path.dirname(path):返回文件路径 
+
+1、os.path方法
+
+     通过传入需要遍历的目录，列出目录下的所有文件并统计文件数，os提供的path模块能对目录非常灵活的操作。
+
+import os,sys
+def listdir(dir,file):
+    file.write(dir + '\n')
+    fielnum = 0
+    list = os.listdir(dir)  #列出目录下的所有文件和目录
+    for line in list:
+        filepath = os.path.join(dir,line)
+        if os.path.isdir(filepath):  #如果filepath是目录，则再列出该目录下的所有文件
+            myfile.write('   ' + line + '\\'+'\n')
+            for li in os.listdir(filepath):
+                myfile.write('     '+li + '\n')
+                fielnum = fielnum + 1
+        elif os.path:   #如果filepath是文件，直接列出文件名
+            myfile.write('   '+line + '\n') 
+            fielnum = fielnum + 1
+    myfile.write('all the file num is '+ str(fielnum))
+dir = raw_input('please input the path:')
+myfile = open('list.txt','w')
+
+
+2、os.walk方法
+
+os模块提供的walk方法很强大，能够把给定的目录下的所有目录和文件遍历出来。
+
+方法：os.walk(path),遍历path，返回一个对象，他的每个部分都是一个三元组,('目录x'，[目录x下的目录list]，目录x下面的文件)
+
+import os
+def walk_dir(dir,fileinfo,topdown=True):
+    for root, dirs, files in os.walk(dir, topdown):
+        for name in files:
+            print(os.path.join(name))
+            fileinfo.write(os.path.join(root,name) + '\n')
+        for name in dirs:
+            print(os.path.join(name))
+            fileinfo.write('  ' + os.path.join(root,name) + '\n')
+dir = raw_input('please input the path:')
+fileinfo = open('list.txt','w')
+walk_dir(dir,fileinfo)
+
+三、
+#对序列进行操作（分别使用' '与':'作为分隔符）
+
+>>> seq1 = ['hello','good','boy','doiido']
+>>> print ' '.join(seq1)
+hello good boy doiido
+>>> print ':'.join(seq1)
+hello:good:boy:doiido
+
+
+#对字符串进行操作
+
+>>> seq2 = "hello good boy doiido"
+>>> print ':'.join(seq2)
+h:e:l:l:o: :g:o:o:d: :b:o:y: :d:o:i:i:d:o
+
+
+#对元组进行操作
+
+>>> seq3 = ('hello','good','boy','doiido')
+>>> print ':'.join(seq3)
+hello:good:boy:doiido
+
+
+#对字典进行操作
+
+>>> seq4 = {'hello':1,'good':2,'boy':3,'doiido':4}
+>>> print ':'.join(seq4)
+boy:good:doiido:hello
+
+
+#合并目录
+
+>>> import os
+>>> os.path.join('/hello/','good/boy/','doiido')
+'/hello/good/boy/doiido'
+http://blog.csdn.net/You77/article/details/52190896
+
+四、
+http://blog.csdn.net/xiaminli/article/details/74944580?locationNum=2&fps=1
+os.path.realpath(__file__)是脚本所在的绝对路径

@@ -1,0 +1,3 @@
+%APPDATA%\atom\app-1.27.0-beta0\resources\app\apm\bin\apm
+apm config set https-proxy http://proxy:8080
+apm config set http-proxy http://proxy:8080

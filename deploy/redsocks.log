@@ -1,0 +1,32 @@
+# 编译libevent，centos自己安装的不行
+wget https://github.com/libevent/libevent/releases/download/release-2.0.22-stable/libevent-2.0.22-stable.tar.gz
+tar xzf libevent-2.0.22-stable.tar.gz
+cd libevent-2.0.22-stable
+./configure
+make && make install
+
+git clone https://github.com/darkk/redsocks
+cd redsocks
+make
+
+cat > redsocks.conf <<EOF
+base {
+ log_debug = on;
+ log_info = on;
+ log = stderr;
+ daemon = on;
+ redirector = iptables;
+}
+redsocks {
+ // local forward port
+ local_ip = 127.0.0.1;
+ local_port = 1;
+ 
+ // local socks5 proxy
+ ip = 192.168.56.1;
+ port = 8888;
+ type = socks5;
+}
+EOF
+
+echo "nohup /root/redsocks/redsocks -c /root/redsocks/redsocks.conf" >> /etc/rc.local

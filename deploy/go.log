@@ -1,0 +1,12 @@
+# go1.4.3
+wget https://redirector.gvt1.com/edgedl/go/go1.4.3.linux-amd64.tar.gz
+tar -xzvf go1.4.3.linux-amd64.tar.gz
+mv go go1.4.3
+export GOROOT="/root/go1.4.3"
+export PATH="$PATH:$GOROOT/bin"
+
+wget https://dl.google.com/go/go1.9.2.linux-amd64.tar.gz
+tar -xzvf go1.9.2.linux-amd64.tar.gz
+mv go go1.9.2
+echo 'GOROOT="/root/go1.9.2"' >> /etc/profile
+echo 'PATH="$PATH:$GOROOT/bin"' >> /etc/profile

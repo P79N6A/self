@@ -1,0 +1,55 @@
+
+
+useradd openwrt
+passwd openwrt
+vim /etc/sudoers
+openwrt ALL=(ALL)       ALL
+
+wget https://downloads.openwrt.org/snapshots/trunk/x86/64/OpenWrt-ImageBuilder-x86-64.Linux-x86_64.tar.bz2
+
+
+git clone git://git.openwrt.org/openwrt.git
+
+cd openwrt
+./scripts/feeds update -a
+./scripts/feeds install -a
+
+make defconfig
+make prereq
+make menuconfig
+
+make clean
+make dirclean
+make distclean
+
+yum install screen -y
+
+screen -S make
+
+ctrl A + D¼ü
+
+screen -r make»Ö¸´
+
+make ±àÒë
+
+V=99 ²ÎÊýÊä³öËùÓÐµ÷ÊÔÐÅÏ¢
+
+-j 2 ²ÎÊý2ºË
+
+make -j 2 V=99
+
+
+# ÒÔ ar71xx Æ½Ì¨ÎªÀý
+tar xjf OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2.tar.bz2
+cd OpenWrt-SDK-ar71xx-*
+# »ñÈ¡ Makefile
+
+git clone https://github.com/aa65535/openwrt-chinadns.git package/chinadns
+
+# Ñ¡ÔñÒª±àÒëµÄ°ü Network -> ChinaDNS
+
+make menuconfig
+
+# ¿ªÊ¼±àÒë
+
+make package/chinadns/compile V=99

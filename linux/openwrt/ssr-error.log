@@ -1,0 +1,17 @@
+# https://github.com/ywb94/openwrt-ssr/issues/132
+在lede中编译刷机后，打开界面报错：
+/usr/lib/lua/luci/dispatcher.lua:469: Failed to execute function dispatcher target for entry '/admin/services/shadowsocksr'.
+The called action terminated with an exception:
+/usr/lib/lua/luci/dispatcher.lua:469: Failed to execute arcombine dispatcher target for entry '/admin/services/shadowsocksr/client'.
+The called action terminated with an exception:
+/usr/lib/lua/luci/model/cbi/shadowsocksr/client.lua:26: attempt to call field 'arptable' (a nil value)
+stack traceback:
+[C]: in function 'assert'
+/usr/lib/lua/luci/dispatcher.lua:469: in function 'dispatch'
+/usr/lib/lua/luci/dispatcher.lua:121: in function </usr/lib/lua/luci/dispatcher.lua:120>
+
+我的解决了，记录下：
+刷机后，编辑vim /usr/lib/lua/luci/model/cbi/shadowsocksr/client.lua
+将local arp_table = luci.sys.net.arptable() or {}
+修改为
+local arp_table = luci.ip.neighbors()

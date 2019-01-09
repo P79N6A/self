@@ -1,0 +1,15 @@
+read -p "nginxver " nginxver
+if [[ -z "$nginxver" ]];then
+    nginxver=1.12.2
+fi
+
+yum install libxslt-devel GeoIP-devel -y
+groupadd www
+useradd -s /sbin/nologin -g www www
+cd /opt
+wget https://dl.ccavs.org/linux/centos/nginx-${nginxver}.tar.gz
+tar -xzvf nginx-${nginxver}.tar.gz
+cd nginx-${nginxver}
+cp -r /opt/nginx-${nginxver}/html /home/www/localhost
+cp /opt/nginx-${nginxver}/sbin/nginx /usr/local/bin
+echo "/opt/nginx-${nginxver}/sbin/nginx" >> /etc/rc.local

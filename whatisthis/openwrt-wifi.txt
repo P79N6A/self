@@ -1,0 +1,20 @@
+opkg update
+opkg install kmod-usb-core
+opkg install kmod-usb-ohci
+opkg install kmod-usb2
+opkg install usbutils
+opkg install kmod-rtl8192cu
+opkg install hostapd
+
+ÖØÆôÏµÍ³ºó
+uci set wireless.@wifi-device[0].disabled=0
+uci commit wireless
+wifi
+
+wifi up
+wifi down
+wifi reload
+
+
+ÖØÐÂÉú³ÉÅäÖÃ
+rm -f /etc/config/wireless; wifi detect > /etc/config/wireless

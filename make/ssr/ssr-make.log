@@ -1,0 +1,70 @@
+## system: Centos-6.9-x86_64
+curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+yum install sbt -y
+yum install java-1.8.0-openjdk java-1.8.0-openjdk-devel -y
+
+wget https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+
+## ndk-r16b会出错
+wget https://dl.google.com/android/repository/android-ndk-r12b-linux-x86_64.zip
+
+unzip sdk-tools-linux-3859397.zip
+mkdir ~/android-sdk && mv ~/tools ~/android-sdk/
+unzip android-ndk-r12b-linux-x86_64.zip
+
+echo 'export ANDROID_HOME="/root/android-sdk"' >> /etc/profile
+echo 'export ANDROID_NDK_HOME="/root/android-ndk-r12b"' >> /etc/profile
+echo 'export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/26.0.1:$ANDROID_NDK_HOME"' >> /etc/profile
+source /etc/profile
+
+# need Android SDK Platform 25
+mkdir /root/.android && touch /root/.android/repositories.cfg
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "platform-tools"
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "platforms;android-26"
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "platforms;android-25"
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "build-tools;26.0.1"
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "extras;google;m2repository"
+echo "y" | ~/android-sdk/tools/bin/sdkmanager "extras;android;m2repository"
+
+git clone -b nokcp https://github.com/shadowsocksr-backup/shadowsocksr-android
+
+##最后一步密码留空
+keytool -genkeypair -alias testname -keystore /root/ssr.keystore -sigalg MD5withRSA -keyalg RSA
+
+cp ~/shadowsocksr-android/local.properties.example ~/shadowsocksr-android/local.properties
+vim ~/shadowsocksr-android/local.properties
+
+wget http://ftp.gnu.org/gnu/glibc/glibc-2.14.tar.gz
+tar -zxvf  glibc-2.14.tar.gz
+mkdir glibc-2.14/glibc-2.14-build && cd glibc-2.14/glibc-2.14-build
+../configure --prefix=/opt/glibc-2.14
+make && make install && cd
+
+wget http://ftp.gnu.org/gnu/glibc/glibc-2.15.tar.gz
+tar -zxvf  glibc-2.15.tar.gz
+mkdir glibc-2.15/glibc-2.15-build && cd glibc-2.15/glibc-2.15-build
+../configure --prefix=/opt/glibc-2.15
+make && make install && cd
+
+echo 'rm -rf /lib64/libc.so.6
+LD_PRELOAD=/lib64/libc-2.12.so ln -s /lib64/libc-2.12.so /lib64/libc.so.6' >> /root/glibc-default.sh
+chmod +x /root/glibc-default.sh
+echo 'ver=2.14
+rm -rf /lib64/libc.so.6
+LD_PRELOAD=/opt/glibc-${ver}/lib/libc-${ver}.so ln -s /opt/glibc-${ver}/lib/libc-${ver}.so /lib64/libc.so.6' >> /root/glibc-2.14.sh
+chmod +x /root/glibc-2.14.sh
+echo 'ver=2.15
+rm -rf /lib64/libc.so.6
+LD_PRELOAD=/opt/glibc-${ver}/lib/libc-${ver}.so ln -s /opt/glibc-${ver}/lib/libc-${ver}.so /lib64/libc.so.6' >> /root/glibc-2.15.sh
+chmod +x /root/glibc-2.15.sh
+
+cd ~/shadowsocksr-android
+git submodule update --init
+/root/glibc-2.15.sh
+./build.sh
+/root/glibc-2.14.sh
+sbt clean android:package-release
+/root/glibc-default.sh
+
+git pull origin
+git reset --hard origin/nokcp

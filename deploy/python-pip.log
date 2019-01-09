@@ -1,0 +1,7 @@
+# get pip
+wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+
+# update pip
+pip install -U pip #linux or mac
+python -m pip install -U pip #win
